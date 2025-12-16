@@ -6,9 +6,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] int speed = 10;
-    [SerializeField] float minimumDistance = 10;
-    bool movePlayer = false;
+    [SerializeField] float minimumDistance = .05f;
     Vector3 targetPos;
+    Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void OnEnable()
     {
         MouseRayCastManager.PlayerWantsToMove += MovePlayer;
@@ -18,18 +24,11 @@ public class PlayerMovement : MonoBehaviour
         MouseRayCastManager.PlayerWantsToMove -= MovePlayer;
     }
 
-    private void Update()
-    {
-        if(movePlayer == true)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed);
-        }
-    }
-
     void MovePlayer(Vector3 targetPosition)
     {
         targetPos = targetPosition;
+        Vector3 dir = targetPos - transform.position;
         print("Moving to " + targetPos);
-        movePlayer = true;
+        rb.velocity = dir.normalized * speed;
     }
 }
