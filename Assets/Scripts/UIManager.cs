@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Slider progressBar;
+    public GameObject skillingProgressBar;
 
     private void OnEnable()
     {
@@ -16,9 +16,14 @@ public class UIManager : MonoBehaviour
         SkillingManager.PlayerIsFishing -= FishingUI;
     }
 
-    void FishingUI()
+    void FishingUI(GameObject goFished)
     {
-        progressBar.enabled = true;
+        skillingProgressBar.SetActive(true);
         //Show Minigame
+    }
+
+    void StopSkillingUI()
+    {
+        skillingProgressBar.SetActive(false);
     }
 }

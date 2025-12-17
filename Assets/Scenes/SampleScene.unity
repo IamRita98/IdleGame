@@ -317,6 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393131590}
+  - component: {fileID: 393131591}
   - component: {fileID: 393131589}
   - component: {fileID: 393131588}
   - component: {fileID: 393131587}
@@ -413,6 +414,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &393131591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393131586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517380fb72895144db0ab54857e74ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSkillType: 0
+  nameOfResource: TestFishingSpot
+  baseHarvestTime: 3
+  baseHarvestAmount: 1
 --- !u!1 &475388242 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7944400261964757372, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
@@ -430,6 +447,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c237802887f43418d894d936664bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseTimeToFinishGathering: 0
+  baseGatherAmount: 0
+--- !u!114 &475388258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475388242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26f2a2f244af3242a0de7788a96419b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLevel: 0
+  fishingLevel: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +605,7 @@ GameObject:
   - component: {fileID: 847222770}
   - component: {fileID: 847222772}
   - component: {fileID: 847222773}
+  - component: {fileID: 847222774}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: GameManager
@@ -630,7 +664,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f844e379954c4b64e8a6040a360734ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressBar: {fileID: 944328613}
+  skillingProgressBar: {fileID: 0}
+--- !u!114 &847222774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847222769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ebe295719d66a4daa08dc3b73ae2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889627427
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,8 +778,8 @@ RectTransform:
   m_GameObject: {fileID: 944328611}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.87, y: 1.87, z: 1.87}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 265453265}
   - {fileID: 799408687}
@@ -1080,7 +1126,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 700938496183098677, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.95
       objectReference: {fileID: 0}
     - target: {fileID: 700938496183098677, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1088,7 +1134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 700938496183098677, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4.97
       objectReference: {fileID: 0}
     - target: {fileID: 700938496183098677, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1119,6 +1165,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6134826515600604663, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6134826515600604663, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: minimumDistance
       value: 1
       objectReference: {fileID: 0}
@@ -1133,6 +1183,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7944400261964757372, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       insertIndex: 2
       addedObject: {fileID: 475388250}
+    - targetCorrespondingSourceObject: {fileID: 7944400261964757372, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 475388258}
   m_SourcePrefab: {fileID: 100100000, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

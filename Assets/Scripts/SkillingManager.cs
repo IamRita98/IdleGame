@@ -7,20 +7,20 @@ public class SkillingManager : MonoBehaviour
     /// <summary>
     /// Called when player starts Fishing
     /// </summary>
-    public static event System.Action PlayerIsFishing;
+    public static event System.Action<GameObject> PlayerIsFishing;
 
     public void CheckSkillToStart(GameObject skillToStart)
     {
         switch (skillToStart.tag)
         {
             case ("FishingSpot"):
-                Fish(); break;
+                Fish(skillToStart); break;
         }
     }
 
-    public void Fish()
+    public void Fish(GameObject skillStarted)
     {
-        PlayerIsFishing?.Invoke();
+        PlayerIsFishing?.Invoke(skillStarted);
         print("Fishing");
     }
 }
