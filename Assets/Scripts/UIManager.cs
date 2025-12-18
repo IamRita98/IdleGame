@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject skillingProgressBar;
+    public Slider skillingProgressBar;
 
-    private void OnEnable()
+    private void Start()
     {
-        SkillingManager.PlayerIsFishing += FishingUI;
+        skillingProgressBar.gameObject.SetActive(false);
     }
-    private void OnDisable()
+    public void FishingUI()
     {
-        SkillingManager.PlayerIsFishing -= FishingUI;
-    }
-
-    void FishingUI(GameObject goFished)
-    {
-        skillingProgressBar.SetActive(true);
+        skillingProgressBar.gameObject.SetActive(true);
         //Show Minigame
     }
 
-    void StopSkillingUI()
+    public void UpdateSkillingBar(float currentTimer, float totalLength)
     {
-        skillingProgressBar.SetActive(false);
+        float percentComplete = currentTimer / totalLength;
+        skillingProgressBar.value = percentComplete;
+    }
+
+    public void StopSkillingUI()
+    {
+        skillingProgressBar.gameObject.SetActive(false);
     }
 }

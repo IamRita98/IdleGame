@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a45e5f5c2e1ae4287ee8d38b2e9ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Sardine
+  itemName: Anchovy

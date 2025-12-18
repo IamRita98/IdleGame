@@ -14,7 +14,6 @@ public class GatheringSpot : MonoBehaviour
     public float baseHarvestTime;
     public int baseHarvestAmount;
     public GatheringSpotType gatheringSpotType;
-    
 
     public List<Item> poolOfMaterials = new List<Item>();
     /// <summary>
@@ -34,8 +33,9 @@ public class GatheringSpot : MonoBehaviour
         int secondNum = oddsForEachItemInPool[0];
         for (int i = 0; i < poolOfMaterials.Count; i++)
         {
-            if (poolOfMaterials[i + 1] == null) return poolOfMaterials[i];
+            
             if (randomNumberRolled >= firstNum && randomNumberRolled < secondNum) return poolOfMaterials[i];
+            else if(poolOfMaterials[i + 1] == null) return poolOfMaterials[i];
             firstNum = oddsForEachItemInPool[i];
             secondNum = oddsForEachItemInPool[i + 1];
         }

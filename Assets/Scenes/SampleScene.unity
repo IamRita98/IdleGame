@@ -482,7 +482,6 @@ GameObject:
   m_Component:
   - component: {fileID: 847222771}
   - component: {fileID: 847222770}
-  - component: {fileID: 847222772}
   - component: {fileID: 847222773}
   - component: {fileID: 847222774}
   m_Layer: 0
@@ -519,18 +518,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &847222772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847222769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1252bc671c3b4dd4c8564d10d0544985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &847222773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f844e379954c4b64e8a6040a360734ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillingProgressBar: {fileID: 0}
+  skillingProgressBar: {fileID: 944328613}
 --- !u!114 &847222774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +577,7 @@ RectTransform:
   m_Father: {fileID: 799408687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -648,7 +635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &944328612
 RectTransform:
   m_ObjectHideFlags: 0

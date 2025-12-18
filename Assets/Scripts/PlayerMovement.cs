@@ -13,7 +13,7 @@ public enum PlayerState
 
 public class PlayerMovement : MonoBehaviour
 {
-    SkillingManager skillingManager;
+    IdleSkilling idleSkilling;
     [SerializeField] int speed = 10;
     float minimumDistance = 1.5f;
     Vector3 targetPos;
@@ -22,13 +22,15 @@ public class PlayerMovement : MonoBehaviour
     GameObject skillToWalkTowards;
     float extraSpaceLeftBetweenSkillAndPlayer = 2.5f;
     Vector3 dir;
+    PlayerItemManager playerItemManager;
 
     public PlayerState currentState;
 
     private void Awake()
     {
-        skillingManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SkillingManager>();
+        idleSkilling = GetComponent<IdleSkilling>();
         rb = GetComponent<Rigidbody>();
+        playerItemManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerItemManager>();
     }
 
     private void OnEnable()
@@ -44,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Controls();
         if (!checkForArrival) return;
         currentState = PlayerState.walking;
         transform.position = Vector3.Lerp(transform.position, targetPos, speed * Time.deltaTime); //Need new way to handle movement
@@ -51,12 +54,27 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, skillToWalkTowards.transform.position) <= minimumDistance + extraSpaceLeftBetweenSkillAndPlayer)
             {
-                currentState = PlayerState.skilling;
-                skillingManager.CheckSkillToStart(skillToWalkTowards);
+                idleSkilling.DetermineSkillingType(skillToWalkTowards);
                 StopPlayer();
             }
         }
         else if (Vector3.Distance(transform.position, targetPos) <= minimumDistance) StopPlayer();
+    }
+
+    void Controls()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ShowInventory();
+        }
+    }
+
+    void ShowInventory()
+    {
+        foreach (Item item in playerItemManager.inventory)
+        {
+            print(item.itemName);
+        }
     }
 
     void MovePlayer(Vector3 targetPosition)
@@ -65,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
         checkForArrival = true;
         targetPos = targetPosition;
         dir = targetPos - transform.position;
-        print("Moving to " + targetPos);
     }
 
     void StopPlayer()
