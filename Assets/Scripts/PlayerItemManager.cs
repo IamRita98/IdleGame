@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerItemManager : MonoBehaviour
 {
-    public List<string> inventory = new List<string>();
+    public List<Item> inventory = new List<Item>();
 }
