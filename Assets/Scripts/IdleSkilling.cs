@@ -83,7 +83,6 @@ public class IdleSkilling : MonoBehaviour
         progressTimer = 0;
         sendToUI = true;
         yield return new WaitForSeconds(timeToIdle);
-        
         GivePlayerItem(itemToGather);
     }
 
