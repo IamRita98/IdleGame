@@ -127,6 +127,42 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 5509627981844801420, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
   m_PrefabInstance: {fileID: 4631053529573014998}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &51482329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51482330}
+  m_Layer: 5
+  m_Name: MinigameUI's
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &51482330
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51482329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1879696216}
+  m_Father: {fileID: 1980245129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &261885654
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,11 +542,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1879696216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!58 &812363113
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -543,9 +579,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 50.165146, y: 49.977505}
   serializedVersion: 2
-  m_Radius: 45.419724
+  m_Radius: 44.580254
 --- !u!114 &812363114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,6 +624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04237b2b2da0e944d91657e912bacab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circleLingerTime: 10
+  circleVerticalBuffer: 50
+  circleHorizontalBuffer: 50
 --- !u!222 &812363116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -655,6 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillingProgressBar: {fileID: 944328613}
+  fishingUI: {fileID: 1879696215}
 --- !u!114 &847222774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,12 +1057,12 @@ GameObject:
   - component: {fileID: 1879696218}
   - component: {fileID: 1879696217}
   m_Layer: 5
-  m_Name: MinigameHUD
+  m_Name: FishingUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1879696216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1030,18 +1070,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879696215}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.82, y: 0.82, z: 0.82}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 812363112}
-  m_Father: {fileID: 1980245129}
+  m_Father: {fileID: 51482330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1820, y: 980}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1879696217
 MonoBehaviour:
@@ -1176,7 +1216,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 944328612}
-  - {fileID: 1879696216}
+  - {fileID: 51482330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
