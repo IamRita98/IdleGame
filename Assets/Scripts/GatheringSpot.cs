@@ -13,6 +13,7 @@ public class GatheringSpot : MonoBehaviour
     int levelToHarvest;
     public float baseHarvestTime;
     public int baseHarvestAmount;
+    public float minigameBonusToApply;
     public GatheringSpotType gatheringSpotType;
 
     public List<Item> poolOfMaterials = new List<Item>();

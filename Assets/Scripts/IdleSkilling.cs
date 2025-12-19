@@ -14,9 +14,13 @@ public class IdleSkilling : MonoBehaviour
     PlayerMovement playerMovement;
     public float totalBonusFromMaxLevel;
     Item itemToGather;
-    bool sendToUI = false;
+    bool isSkilling = false;
     float progressTimer;
     GameObject skillingLocationGO;
+    public bool wantToApplyMinigameBonus = false;
+    FishingMinigame fishingMinigame;
+    GatheringSpot gatheringSpot;
+
 
     private void Awake()
     {
@@ -28,33 +32,36 @@ public class IdleSkilling : MonoBehaviour
 
     private void Update()
     {
-        if (!sendToUI) return;
+        if (!isSkilling) return;
         if (playerMovement.currentState != PlayerState.skilling)
         {
             StopSkilling();
         }
         progressTimer += Time.deltaTime;
+        if (wantToApplyMinigameBonus) uiManager.ApplyMinigameBonusVFX();
+        else uiManager.UnapplyMinigameBonusVFX();
         uiManager.UpdateSkillingBar(progressTimer, timeToFinishGathering);
     }
-
+    
     public void DetermineSkillingType(GameObject skillingGO)
     {
         skillingLocationGO = skillingGO;
         playerMovement.currentState = PlayerState.skilling;
-        GatheringSpot gatheringSpot = skillingGO.GetComponent<GatheringSpot>();
+        gatheringSpot = skillingGO.GetComponent<GatheringSpot>();
         baseTimeToFinishGathering = gatheringSpot.baseHarvestTime;
         baseGatherAmount = gatheringSpot.baseHarvestAmount;
 
         switch (gatheringSpot.tag)
         {
             case ("FishingSpot"):
-                Fish(gatheringSpot); break;
+                Fish(); break;
         }
     }
 
-    void Fish(GatheringSpot gatheringSpot)
+    void Fish()
     {
         uiManager.FishingUI();
+        fishingMinigame = GameObject.FindGameObjectWithTag("FishingMinigame").GetComponent<FishingMinigame>();
         int fishingStat = stats.fishingLevel;
         timeToFinishGathering = CalcTimeToFinishGathering(fishingStat);
         int itemRoll = Random.Range(0, 100);
@@ -64,6 +71,7 @@ public class IdleSkilling : MonoBehaviour
 
     float CalcTimeToFinishGathering(int level)
     {
+        if (wantToApplyMinigameBonus) baseTimeToFinishGathering *= gatheringSpot.minigameBonusToApply;
         float reductionFromLevel = level * .1f;
         float timeToFinishGathering = baseTimeToFinishGathering - reductionFromLevel; //rly basic formula that reduces the time by min to max seconds(1-99 for min-maxlvl?)
         return timeToFinishGathering;
@@ -81,7 +89,7 @@ public class IdleSkilling : MonoBehaviour
     IEnumerator Idleing(float timeToIdle)
     {
         progressTimer = 0;
-        sendToUI = true;
+        isSkilling = true;
         yield return new WaitForSeconds(timeToIdle);
         
         GivePlayerItem(itemToGather);
@@ -89,7 +97,7 @@ public class IdleSkilling : MonoBehaviour
 
     void StopSkilling()
     {
-        sendToUI = false;
+        isSkilling = false;
         StopAllCoroutines();
         uiManager.StopSkillingUI();
         playerMovement.currentState = PlayerState.idle;

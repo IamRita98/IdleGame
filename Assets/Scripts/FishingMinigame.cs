@@ -10,22 +10,23 @@ public class FishingMinigame : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public float circleVerticalBuffer = 50;
     public float circleHorizontalBuffer = 50;
     RectTransform parentPanel;
+    IdleSkilling idleSkilling;
 
     private void OnEnable()
     {
+        idleSkilling = GameObject.FindGameObjectWithTag("Player").GetComponent<IdleSkilling>();
         parentPanel = transform.parent.GetComponent<RectTransform>();
         RandomizeCirclesSpotOnMinigameScreen();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("Cum");
-        //GiveBonusToIdleSkilling
+        idleSkilling.wantToApplyMinigameBonus = true;
         //ChangeUIToReflectHover(MakeCircleDarker & ChangeProgBarColor)
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        print("No Cum");
+        idleSkilling.wantToApplyMinigameBonus = false;
     }
 
     void RandomizeCirclesSpotOnMinigameScreen()

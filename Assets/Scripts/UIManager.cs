@@ -6,19 +6,22 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Slider skillingProgressBar;
-    public GameObject fishingUI;
+    public GameObject fishingUIGO;
     GameObject currentSkillingUI;
+    IdleSkilling idleSkilling;
+    public Image progressBarFill;
 
     private void Start()
     {
+        idleSkilling = GameObject.FindGameObjectWithTag("Player").GetComponent<IdleSkilling>();
         skillingProgressBar.gameObject.SetActive(false);
     }
+
     public void FishingUI()
     {
         skillingProgressBar.gameObject.SetActive(true);
-        fishingUI.SetActive(true);
-        currentSkillingUI = fishingUI;
-        //Show Minigame
+        fishingUIGO.SetActive(true);
+        currentSkillingUI = fishingUIGO;
     }
 
     public void UpdateSkillingBar(float currentTimer, float totalLength)
@@ -31,5 +34,18 @@ public class UIManager : MonoBehaviour
     {
         skillingProgressBar.gameObject.SetActive(false);
         currentSkillingUI.SetActive(false);
+    }
+
+    public void ApplyMinigameBonusVFX()
+    {
+        
+        Vector4 progressBarBoostedRGBA = new Vector4(210, 130, 40, 225);
+        progressBarFill.color = progressBarBoostedRGBA;
+    }
+
+    public void UnapplyMinigameBonusVFX()
+    {
+        Vector4 progressBarOrginalRGBA = new Vector4(210, 205, 40, 225);
+        progressBarFill.color = progressBarOrginalRGBA;
     }
 }

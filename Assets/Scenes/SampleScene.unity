@@ -364,6 +364,7 @@ MonoBehaviour:
   baseTimeToFinishGathering: 0
   baseGatherAmount: 0
   totalBonusFromMaxLevel: 0
+  wantToApplyMinigameBonus: 0
 --- !u!114 &475388258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +524,7 @@ GameObject:
   - component: {fileID: 812363113}
   m_Layer: 5
   m_Name: FishingMouseCircle
-  m_TagString: Untagged
+  m_TagString: FishingMinigame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43867922, g: 0.87071127, b: 1, a: 1}
+  m_Color: {r: 0.43867922, g: 0.87071127, b: 1, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -694,7 +695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillingProgressBar: {fileID: 944328613}
-  fishingUI: {fileID: 1879696215}
+  fishingUIGO: {fileID: 1879696215}
+  progressBarFill: {fileID: 889627429}
 --- !u!114 &847222774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.70022637, g: 0.7830189, b: 0.23268957, a: 1}
+  m_Color: {r: 0.8207547, g: 0.80008703, b: 0.15873085, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1233,6 +1235,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1947948967852496576, guid: 6d110d19eeca9264cb4ce4b0f857bf4c, type: 3}
+      propertyPath: minigameBonusToApply
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947948967852496576, guid: 6d110d19eeca9264cb4ce4b0f857bf4c, type: 3}
       propertyPath: oddsForEachItemInPool.Array.data[0]
       value: 49
       objectReference: {fileID: 0}
@@ -1347,6 +1353,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7944400261964757372, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7944400261964757372, guid: 1eb4edfed43495c46a5b4769771cfd69, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
