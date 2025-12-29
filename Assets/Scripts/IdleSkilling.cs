@@ -33,14 +33,14 @@ public class IdleSkilling : MonoBehaviour
     private void Update()
     {
         if (!isSkilling) return;
-        if (playerMovement.currentState != PlayerState.skilling)
-        {
-            StopSkilling();
-        }
-        progressTimer += Time.deltaTime;
-        if (wantToApplyMinigameBonus) uiManager.ApplyMinigameBonusVFX();
-        else uiManager.UnapplyMinigameBonusVFX();
+        if (playerMovement.currentState != PlayerState.skilling) StopSkilling();
+
+        //UpdateProgress of skilling
+        if (!wantToApplyMinigameBonus) progressTimer += Time.deltaTime;
+        else progressTimer += Time.deltaTime * gatheringSpot.minigameBonusToApply;
         uiManager.UpdateSkillingBar(progressTimer, timeToFinishGathering);
+
+        if (progressTimer >= timeToFinishGathering) GivePlayerItem(itemToGather);
     }
     
     public void DetermineSkillingType(GameObject skillingGO)
@@ -66,14 +66,14 @@ public class IdleSkilling : MonoBehaviour
         timeToFinishGathering = CalcTimeToFinishGathering(fishingStat);
         int itemRoll = Random.Range(0, 100);
         itemToGather = gatheringSpot.GetItemFromPool(itemRoll);
-        StartCoroutine(Idleing(timeToFinishGathering));
+        progressTimer = 0;
+        isSkilling = true;
     }
 
     float CalcTimeToFinishGathering(int level)
     {
-        if (wantToApplyMinigameBonus) baseTimeToFinishGathering *= gatheringSpot.minigameBonusToApply;
         float reductionFromLevel = level * .1f;
-        float timeToFinishGathering = baseTimeToFinishGathering - reductionFromLevel; //rly basic formula that reduces the time by min to max seconds(1-99 for min-maxlvl?)
+        float timeToFinishGathering = baseTimeToFinishGathering - reductionFromLevel; //rly basic formula that reduces the time by min to max miliseconds(1-99 for min-maxlvl?)
         return timeToFinishGathering;
     }
 
@@ -84,15 +84,6 @@ public class IdleSkilling : MonoBehaviour
         print("+1 " + obtainedItem.name);
         playerItemManager.inventory.Add(obtainedItem);
         DetermineSkillingType(skillingLocationGO);
-    }
-
-    IEnumerator Idleing(float timeToIdle)
-    {
-        progressTimer = 0;
-        isSkilling = true;
-        yield return new WaitForSeconds(timeToIdle);
-        
-        GivePlayerItem(itemToGather);
     }
 
     void StopSkilling()
