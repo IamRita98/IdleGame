@@ -36,17 +36,15 @@ public class UIManager : MonoBehaviour
         currentSkillingUI.SetActive(false);
     }
 
-    Color progressBarBoostedRGBA = new Color(210, 200, 40, 225);
+    //Color progressBarBoostedRGBA = new Color(210, 200, 40, 225);
     public void ApplyMinigameBonusVFX()
     {
-        print("Change Color");
         progressBarFill.color = Color.yellow;
     }
 
-    Color progressBarOrginalRGBA = new Color(255, 255, 255, 225);
+    //Color progressBarOrginalRGBA = new Color(255, 255, 255, 225);
     public void UnapplyMinigameBonusVFX()
     {
-        print("Unchange Color");
         progressBarFill.color = Color.white;
     }
 }
