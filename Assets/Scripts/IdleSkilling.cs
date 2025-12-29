@@ -12,7 +12,6 @@ public class IdleSkilling : MonoBehaviour
     PlayerItemManager playerItemManager;
     UIManager uiManager;
     PlayerMovement playerMovement;
-    public float totalBonusFromMaxLevel;
     Item itemToGather;
     bool isSkilling = false;
     float progressTimer;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum PlayerState
 {
@@ -13,21 +14,28 @@ public enum PlayerState
 
 public class PlayerMovement : MonoBehaviour
 {
+    const string IDLE = "Idle";
+    const string WALK = "Walk";
+    NavMeshAgent agent;
+    //Animator animator;
+    //float lookRotationSpeed = 8f;
+
     IdleSkilling idleSkilling;
-    [SerializeField] int speed = 10;
     float minimumDistance = 1.5f;
     Vector3 targetPos;
     Rigidbody rb;
     public bool checkForArrival = false;
     GameObject skillToWalkTowards;
     float extraSpaceLeftBetweenSkillAndPlayer = 2.5f;
-    Vector3 dir;
     PlayerItemManager playerItemManager;
 
     public PlayerState currentState;
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        //animator = GetComponent<Animator>();
+        
         idleSkilling = GetComponent<IdleSkilling>();
         rb = GetComponent<Rigidbody>();
         playerItemManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerItemManager>();
@@ -49,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         Controls();
         if (!checkForArrival) return;
         currentState = PlayerState.walking;
-        transform.position = Vector3.Lerp(transform.position, targetPos, speed * Time.deltaTime); //Need new way to handle movement
         if(skillToWalkTowards != null)
         {
             if (Vector3.Distance(transform.position, skillToWalkTowards.transform.position) <= minimumDistance + extraSpaceLeftBetweenSkillAndPlayer)
@@ -79,10 +86,8 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer(Vector3 targetPosition)
     {
-        currentState = PlayerState.walking;
+        agent.destination = targetPosition;
         checkForArrival = true;
-        targetPos = targetPosition;
-        dir = targetPos - transform.position;
     }
 
     void StopPlayer()
