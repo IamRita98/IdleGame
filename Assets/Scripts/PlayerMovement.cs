@@ -14,8 +14,6 @@ public enum PlayerState
 
 public class PlayerMovement : MonoBehaviour
 {
-    const string IDLE = "Idle";
-    const string WALK = "Walk";
     NavMeshAgent agent;
     //Animator animator;
     //float lookRotationSpeed = 8f;

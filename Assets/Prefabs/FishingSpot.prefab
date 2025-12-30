@@ -49,10 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHarvestTime: 3
   baseHarvestAmount: 1
+  minigameBonusToApply: 0
+  gatheringSpotType: 0
   poolOfMaterials:
   - {fileID: 2829638758201029643, guid: 0dd2a961ba0ccb4459500b692fc9a474, type: 3}
   - {fileID: 2829638758201029643, guid: 5da347c01b1793a42b6cd5afbc27e5f5, type: 3}
-  oddsForEachItemInPool: 3200000032000000
+  oddsForEachItemInPool: 1e00000064000000
 --- !u!33 &4583189589762001694
 MeshFilter:
   m_ObjectHideFlags: 0
