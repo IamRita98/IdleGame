@@ -27,14 +27,14 @@ public class GatheringSpot : MonoBehaviour
     /// </summary>
     /// <param name="randomNumberRolled"></param>
     /// <returns></returns>
-    public Item GetItemFromPool(int randomNumberRolled)
+    public Item GetItemFromPool()
     {
+        int randomNumberRolled = Random.Range(0, 100);
         Item itemRolledFromPool = null;
         int firstNum = 0;
         int secondNum = oddsForEachItemInPool[0];
         for (int i = 0; i < poolOfMaterials.Count; i++)
         {
-            
             if (randomNumberRolled >= firstNum && randomNumberRolled < secondNum) return poolOfMaterials[i];
             else if(poolOfMaterials[i + 1] == null) return poolOfMaterials[i];
             firstNum = oddsForEachItemInPool[i];

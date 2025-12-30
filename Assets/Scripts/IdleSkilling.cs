@@ -19,6 +19,7 @@ public class IdleSkilling : MonoBehaviour
     public bool wantToApplyMinigameBonus = false;
     FishingMinigame fishingMinigame;
     GatheringSpot gatheringSpot;
+    string currentSkillEngagedWith;
 
 
     private void Awake()
@@ -39,9 +40,17 @@ public class IdleSkilling : MonoBehaviour
         else progressTimer += Time.deltaTime * gatheringSpot.minigameBonusToApply;
         uiManager.UpdateSkillingBar(progressTimer, timeToFinishGathering);
 
-        if (progressTimer >= timeToFinishGathering) GivePlayerItem(itemToGather);
+        if (progressTimer >= timeToFinishGathering)
+        {
+            GivePlayerXP();
+            GivePlayerItem(itemToGather);
+
+            //Loop skilling from the start, can maybe make this a bit more efficient since we already know what skill
+            //player is engaged w/ but I don't think it's a big deal rn
+            DetermineSkillingType(skillingLocationGO);
+        }
     }
-    
+
     public void DetermineSkillingType(GameObject skillingGO)
     {
         skillingLocationGO = skillingGO;
@@ -53,7 +62,7 @@ public class IdleSkilling : MonoBehaviour
         switch (gatheringSpot.tag)
         {
             case ("FishingSpot"):
-                Fish(); break;
+                currentSkillEngagedWith = "Fishing"; Fish(); break;
         }
     }
 
@@ -63,8 +72,7 @@ public class IdleSkilling : MonoBehaviour
         fishingMinigame = GameObject.FindGameObjectWithTag("FishingMinigame").GetComponent<FishingMinigame>();
         int fishingStat = stats.fishingLevel;
         timeToFinishGathering = CalcTimeToFinishGathering(fishingStat);
-        int itemRoll = Random.Range(0, 100);
-        itemToGather = gatheringSpot.GetItemFromPool(itemRoll);
+        itemToGather = gatheringSpot.GetItemFromPool();
         progressTimer = 0;
         isSkilling = true;
     }
@@ -79,16 +87,22 @@ public class IdleSkilling : MonoBehaviour
     void GivePlayerItem(Item obtainedItem)
     {
         itemToGather = null;
-
         print("+1 " + obtainedItem.name);
         playerItemManager.inventory.Add(obtainedItem);
-        DetermineSkillingType(skillingLocationGO);
+    }
+
+    void GivePlayerXP()
+    {
+        switch (currentSkillEngagedWith)
+        {
+            case "Fishing":
+                stats.GainFishingXP(itemToGather.xpToGainOnGather); break;
+        }
     }
 
     void StopSkilling()
     {
         isSkilling = false;
-        StopAllCoroutines();
         uiManager.StopSkillingUI();
         playerMovement.currentState = PlayerState.idle;
     }
